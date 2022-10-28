@@ -16,10 +16,6 @@ For my final project, I will be using a random generator (ex: spinny wheel with 
 
 For my final project, I will be studying the effects of certain habits that pregnant mothers participate in that may affect their overall health and how that impacts the child. I found a great data set that includes birth statistics from 1000 randomly selected births in 2014. These statistics are mother's age, father's age, mother's race, number of weeks pregnant, amount of weight gained during pregnancy, weight of baby, gender of baby, sex of baby, the maturity of the mother (younger or older), if the baby was a preemie or was carried to full term, if the birth weight was low, smoking habits, and if the mother was white or not. Although there are a lot of interesting questions that can be explored in this data set, I think I will be determining whether or not there is a correlation between if the mother smoked during pregnancy and if the baby was a preemie.
 
-```{r}
-remove(X2022_alabama_sat_suite_of_assessments_annual_report)
-
-```
 
 ```{r}
 library(tidyverse)
@@ -52,7 +48,13 @@ summarise(premie_mean= mean(ifpremie))
 ```
 
 ```{r}
-lm(ifpremie~habit, data=births14)
+births14|>
+  count(habit)
+```
+
+
+```{r}
+lm(ifpremie~habit, data= births14)
 ```
 
 
