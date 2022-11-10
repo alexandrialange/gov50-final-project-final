@@ -17,6 +17,17 @@ For my final project, I will be using a random generator (ex: spinny wheel with 
 For my final project, I will be studying the effects of certain habits that pregnant mothers participate in that may affect their overall health and how that impacts the child. I found a great data set that includes birth statistics from 1000 randomly selected births in 2014. These statistics are mother's age, father's age, mother's race, number of weeks pregnant, amount of weight gained during pregnancy, weight of baby, gender of baby, sex of baby, the maturity of the mother (younger or older), if the baby was a preemie or was carried to full term, if the birth weight was low, smoking habits, and if the mother was white or not. Although there are a lot of interesting questions that can be explored in this data set, I think I will be determining whether or not there is a correlation between if the mother smoked during pregnancy and if the baby was a preemie.
 
 
+## Proposal
+
+
+After analyzing the dataset and mulling over possible research questions, I have decided to stick with the effect (if any) of smoking habits on the likelihood of a pregnant female being able to carry to term. I believe that there will be an increased chance of a pregnant female not being able to carry the child to full term and instead having a preemie (child born through preterm birth) if they have a habit of smoking during pregnancy than women who did not smoke during pregnancy. While smoking is harmful to an individual’s health in any circumstance, its harmful effects go beyond the individual during pregnancy and have the ability to impact a developing fetus’s health. The CDC (Centers for Disease Control and Prevention) has published that smoking during pregnancy can cause tissue damage in the lung(s) and the brain of the unborn baby, as well as increase the odds of the child having a cleft lip. There is also mention that smoking during pregnancy also leads to preterm labor and low birth weight, so I will be testing the first of these two statements to see if they hold true in these randomly selected 1000 birth cases that occurred in the US in 2014. In order to measure this, I will be creating a binary variable out of the preemie variable, assigning “1” to “preemie” and “0” to “full term”. From there, I will be able to the mean of the preemies present within each group (smokers v. non-smokers). If the mean of preemies is higher within the group of smokers than the group of women that did not have the habit of smoking during pregnancy, then this will help support my hypothesis. I could also run a regression to see if there is an association between smoking and preemies. If this number if positive, then there is an association, again supporting my hypothesis. However, if either the mean of preemies present is higher in the group of non-smokers or the regression value is negative, then my hypothesis would be disproven. It is important to keep in mind, however, that while my data may suggest a conclusion (whatever that may be), this conclusion is not an exact science as there are many other factors that could affect the chances of preterm labor. 
+
+
+
+
+
+## Playing Around with Data 
+
 ```{r}
 library(tidyverse)
 library(ggplot2)
@@ -25,31 +36,36 @@ births14 <- read_csv("~/Downloads/births14 (1).csv")
 
 ```
 
+
+
 ```{r}
 births14<-births14|>
   mutate(ifpremie=ifelse(premie == "premie", 1, 0))
-births14
-
-```
-
-```{r}
-births14|>
-  group_by(habit, ifpremie)|>
-  drop_na()|>
-  count()
 ```
 
 ```{r}
 births14|>
   group_by(habit)|>
-  drop_na()|>
-summarise(premie_mean= mean(ifpremie))
+  remove_missing()|>
+summarise(premie_mean= mean(ifpremie))|>
+  ggplot(mapping = aes(x= habit,
+                        y=premie_mean))+
+  geom_col()+
+  labs(title = "Distribution of Premies by Habits of the Mother (Smoker v. Non Smoker)", 
+       x= "Habits of the Mother", 
+       y= "Average Premies in Group")
   
 ```
 
 ```{r}
 births14|>
-  count(habit)
+  group_by(habit, ifpremie)|>
+  remove_missing()|>
+ count(ifpremie)
+```
+```{r}
+births14|>
+  count(habit, ifpremie)
 ```
 
 
