@@ -51,8 +51,7 @@ summarise(premie_mean= mean(ifpremie))|>
   ggplot(mapping = aes(x= habit,
                         y=premie_mean))+
   geom_col()+
-  labs(title = "Distribution of Premies by Habits of the Mother (Smoker v. Non Smoker)", 
-       x= "Habits of the Mother", 
+  labs(x= "Habits of the Mother", 
        y= "Average Premies in Group")
   
 ```
