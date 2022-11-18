@@ -16,20 +16,17 @@ For my final project, I will be using a random generator (ex: spinny wheel with 
 
 For my final project, I will be studying the effects of certain habits that pregnant mothers participate in that may affect their overall health and how that impacts the child. I found a great data set that includes birth statistics from 1000 randomly selected births in 2014. These statistics are mother's age, father's age, mother's race, number of weeks pregnant, amount of weight gained during pregnancy, weight of baby, gender of baby, sex of baby, the maturity of the mother (younger or older), if the baby was a preemie or was carried to full term, if the birth weight was low, smoking habits, and if the mother was white or not. Although there are a lot of interesting questions that can be explored in this data set, I think I will be determining whether or not there is a correlation between if the mother smoked during pregnancy and if the baby was a preemie.
 
-
 ## Milestone 2: Proposal
 
+After analyzing the dataset and mulling over possible research questions, I have decided to stick with the effect (if any) of smoking habits on the likelihood of a pregnant female being able to carry to term. I believe that there will be an increased chance of a pregnant female not being able to carry the child to full term and instead having a preemie (child born through preterm birth) if they have a habit of smoking during pregnancy than women who did not smoke during pregnancy. While smoking is harmful to an individual's health in any circumstance, its harmful effects go beyond the individual during pregnancy and have the ability to impact a developing fetus's health. The CDC (Centers for Disease Control and Prevention) has published that smoking during pregnancy can cause tissue damage in the lung(s) and the brain of the unborn baby, as well as increase the odds of the child having a cleft lip. There is also mention that smoking during pregnancy also leads to preterm labor and low birth weight, so I will be testing the first of these two statements to see if they hold true in these randomly selected 1000 birth cases that occurred in the US in 2014. In order to measure this, I will be creating a binary variable out of the preemie variable, assigning "1" to "preemie" and "0" to "full term". From there, I will be able to the mean of the preemies present within each group (smokers v. non-smokers). If the mean of preemies is higher within the group of smokers than the group of women that did not have the habit of smoking during pregnancy, then this will help support my hypothesis. I could also run a regression to see if there is an association between smoking and preemies. If this number if positive, then there is an association, again supporting my hypothesis. However, if either the mean of preemies present is higher in the group of non-smokers or the regression value is negative, then my hypothesis would be disproven. It is important to keep in mind, however, that while my data may suggest a conclusion (whatever that may be), this conclusion is not an exact science as there are many other factors that could affect the chances of preterm labor.
 
-After analyzing the dataset and mulling over possible research questions, I have decided to stick with the effect (if any) of smoking habits on the likelihood of a pregnant female being able to carry to term. I believe that there will be an increased chance of a pregnant female not being able to carry the child to full term and instead having a preemie (child born through preterm birth) if they have a habit of smoking during pregnancy than women who did not smoke during pregnancy. While smoking is harmful to an individual’s health in any circumstance, its harmful effects go beyond the individual during pregnancy and have the ability to impact a developing fetus’s health. The CDC (Centers for Disease Control and Prevention) has published that smoking during pregnancy can cause tissue damage in the lung(s) and the brain of the unborn baby, as well as increase the odds of the child having a cleft lip. There is also mention that smoking during pregnancy also leads to preterm labor and low birth weight, so I will be testing the first of these two statements to see if they hold true in these randomly selected 1000 birth cases that occurred in the US in 2014. In order to measure this, I will be creating a binary variable out of the preemie variable, assigning “1” to “preemie” and “0” to “full term”. From there, I will be able to the mean of the preemies present within each group (smokers v. non-smokers). If the mean of preemies is higher within the group of smokers than the group of women that did not have the habit of smoking during pregnancy, then this will help support my hypothesis. I could also run a regression to see if there is an association between smoking and preemies. If this number if positive, then there is an association, again supporting my hypothesis. However, if either the mean of preemies present is higher in the group of non-smokers or the regression value is negative, then my hypothesis would be disproven. It is important to keep in mind, however, that while my data may suggest a conclusion (whatever that may be), this conclusion is not an exact science as there are many other factors that could affect the chances of preterm labor. 
+Further, I think it would be interest to expand my research to more possible effects of smoking during pregnancy. Another statement by the CDC says that women who smoke during pregnancy are more likely to have their babies be born at a low birth weight. These are babies born weighing less than 5lbs, 8 ounces. However, this data set already has a variable for this "lowbirthweight", labelling nerborns as either "not low" or "low".
 
-Further, I think it would be interest to expand my research to more possible effects of smoking during pregnancy. Another statement by the CDC says that women who smoke during pregnancy are more likely to have their babies be born at a low birth weight. These are babies born weighing less than 5lbs, 8 ounces. However, this data set already has a variable for this "lowbirthweight", labelling nerborns as either "not low" or "low". 
-
-
-
-## Milestone 3: One Data Visualization
+## Milestone 3:Data Visualizations
 
 ```{r}
 library(tidyverse)
+library(broom)
 library(ggplot2)
 library(readr)
 births14 <- read_csv("~/Downloads/births14 (1).csv")
@@ -42,10 +39,19 @@ births14 <- read_csv("~/Downloads/births14 (1).csv")
 ```{r}
 births14<-births14|>
   mutate(ifpremie=ifelse(premie == "premie", 1, 0))
+
+habit_premie_mean<-births14|>
+  group_by(habit)|>
+  remove_missing()|>
+summarise(premie_mean= mean(ifpremie))
+
+knitr::kable(digits = 2, habit_premie_mean)
 ```
 
+
+
 ```{r}
-births14|>
+habit_premie<-births14|>
   group_by(habit)|>
   remove_missing()|>
 summarise(premie_mean= mean(ifpremie))|>
@@ -54,40 +60,64 @@ summarise(premie_mean= mean(ifpremie))|>
   geom_col()+
   labs(x= "Habits of the Mother", 
        y= "Average Premies in Group")
+
+habit_premie
   
 ```
 
+Interpretation of Table & Graph: Roughly 24% of babies whose mother is a smoker were born prematurely, compared to only 11% of babies whose mothers are not smokers were born prematurely. The proportion of babies that were born prematurely was more than doubled when the mother smoked, compared to when the mother didn't. This (preliminarily) supports the intention of this report, which was to determine within this random data set (whether what the CBC said can be seen in practice: that smoking decreases the odds that a woman may be able to carry to full term). 
 
 ## Correlation of Habits to Premie Baby
+
 ```{r}
 lm(ifpremie~habit, data= births14)
 ```
 
+Interpretation of Linear Regression: 
+0.1107= the proportion of babies that are born premies born when there are no mothers that have a habit of smoking
+
+0.1086= the average change (increase) in the proportion of babies that are born premies  when the mothers have smoking habits present
+**need help with writing the interpretations
+
+This shows that there is an increase in the proportion of babies born that are premies with the presence of mothers that have a habit of smoking.  
+
+
+## Effect of Habit on Baby Weight
 ```{r}
 births14<-births14|>
   mutate(ifsmoker=ifelse(habit == "smoker", 1, 0))
-births14
-```
 
-
-
-## Effect of Habit on Baby Weight 
-```{r} 
-births14|>
+habit_birthweight<-births14|>
   group_by(weight, habit)|>
   remove_missing()|>
   summarise(baby_weight= mean(weight))|>
   ggplot(mapping = aes(x= habit,
                         y=baby_weight))+
  geom_boxplot()
+habit_birthweight
 ```
 
+This graph shows that the median baby weight (in pounds) is less when the mother had a habit of smoking than when the mother did not. It also shows that the variance in baby weight had a smaller range when the mother was a smoker. The highest baby weights recorded in the group whose mothers smoked was lighter than the highest baby weights of those with mothers that did not smoke. The distribution of babies' weights was also different, with the middle 50% of babies' weights for the group whose mothers smoked ranger between about 5.8 to 7.1 lbs, while the middle 50% of babies' weights for the group whose mothers did not smoke ranged from 6.25 to about 7.9 lbs. The range of the middle 50% of the weights for babies whose mothers did not smoke was slightly larger than that of the group whose mothers did smoke. The smallest baby weight within the data set belonged to the group in which the mothers smoked, as seen by the smallest outliar on this graph. This graph indicates the increased likelihood of a child born to a mother who smokes having a lower birth weight than a child being born to a mother that does not smoke. 
+
 ## Effect of Habit on Whether or Not Baby has low Birth Weight
+
 ```{r}
 births14<-births14|>
   mutate(iflow=ifelse(lowbirthweight == "low", 1, 0))
 
-births14|>
+habitlowbirthw_mean<-births14|>
+  group_by(habit)|>
+  remove_missing()|>
+summarise(low_mean= mean(iflow))
+
+knitr::kable(digits = 2, habitlowbirthw_mean)
+```
+
+
+
+
+```{r}
+habit_lowbirthweight<-births14|>
   group_by(habit)|>
   remove_missing()|>
 summarise(low_mean= mean(iflow))|>
@@ -96,10 +126,26 @@ summarise(low_mean= mean(iflow))|>
   geom_col()+
   labs(x= "Habits of the Mother", 
        y= "Average Babies Born at Low Birth Weight")
+habit_lowbirthweight
+
 ```
+Interpretation of Chart and Graph: About 6% of the babies that were born to mothers who were nonsmokers were classified as having a "low birth weight", whereas about 23% of the babies that were born to mothers that were smokers were classified as having a "low birth rate". The proportion of babies that were classifies as having a "low birth weight" almost quadrupled when the mother smoked, in comparison to when the mother didn't. This supports the claim of the CDC that smoking during pregancy increases the chances that your child will be born with a low birth weight. 
+
+
+
 
 ## Correlation of Habits to Low Birth Weight Baby
+
 ```{r}
 lm(iflow~habit, data= births14)
 ```
+
+Interpretation of Linear Regression: 
+
+0.06228= the proportion of babies that are classified as being born with a "low birth weight" when their mothers did not smoke 
+
+0.14824= the average change "increase" in the proportion of babies that are classified as being born with a "low birth weight" when the mothers smoked
+
+
+There is an increase in the proportion of babies that are classified as being born with a "low birth weight" when the habit of smoking was present in the mothers. 
 
