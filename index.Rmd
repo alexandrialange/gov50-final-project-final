@@ -16,7 +16,7 @@ For my final project, I will be studying the effects of certain habits that preg
 
 After analyzing the data set and considering possible research questions, I have decided to investigate the effects of smoking habits on the probabilities of a pregnant female being able to carry to term and of her baby being born with a low birth weight (less than 5lbs 8 ounces). I suspect there will be a higher rate of babies born prematurely and a higher rate of babies born with a low birth weight in the group of mothers who had a habit of smoking compared to the group of mothers who did not. 
 
- While smoking is harmful to an individual's health in any circumstance, its harmful effects go beyond the individual during pregnancy and have the ability to impact a developing fetus' health. The Centers for Disease Control and Prevention (CDC) has published that smoking during pregnancy can cause tissue damage in the lung(s) and the brain of the unborn baby, as well as increase the odds of the child having a cleft lip. There is also mention that smoking during pregnancy leads to preterm labor and low birth weight. In the following study, I will test both of these statements to see whether they hold true. 
+ While smoking is harmful to an individual's health in any circumstance, its harmful effects go beyond the individual during pregnancy and have the ability to impact a developing fetus' health. The Centers for Disease Control and Prevention (CDC) has published that smoking during pregnancy can cause tissue damage in the lung(s) and the brain of the unborn baby, as well as increase the odds of the child having a cleft lip. There is also mention that smoking during pregnancy leads to preterm labor and low birth weight. In the following study,I will test both of these statements to see whether they hold true. 
  
  Therefore, my research conjecture is that smoking makes premature birth and/or low fetal birth weight more likely, in line with the claims of the CDC. The data set I will use to perform my analysis consists of a random sample of 1000 birth cases that occurred in the US in 2014. Given that random sampling was used, my results should be generalizable to all pregnant women in the US (that gave birth that year???-ask). 
  
@@ -132,7 +132,6 @@ visualise(null_dist)+
 p_val_preemie<-null_dist|>
   get_p_value(obs_stat = corr1, direction = "greater") # ask???
 p_val_preemie
-
 ```
 
 
