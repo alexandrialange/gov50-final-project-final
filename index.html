@@ -1583,7 +1583,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>preemie_mean<span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>ifpreemie</span><span class='op'>)</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span> <span class='va'>habit</span>,</span>
 <span>                        y<span class='op'>=</span><span class='va'>preemie_mean</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>fill<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"skyblue2"</span>,<span class='st'>"red2"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>fill<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"aquamarine2"</span>,<span class='st'>"purple1"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>"Average Proportion of Preemies by US Mothers' Smoking Habits (2014)"</span>,</span>
 <span>         x<span class='op'>=</span> <span class='st'>"Smoking Habits"</span>, </span>
 <span>       y<span class='op'>=</span> <span class='st'>"Proportion of Preemies"</span><span class='op'>)</span> <span class='op'>+</span></span>
@@ -1642,7 +1642,7 @@ Explanatory: habit_binary (numeric)
 <span>  <span class='fu'><a href='https://infer.tidymodels.org/reference/calculate.html'>calculate</a></span><span class='op'>(</span>stat<span class='op'>=</span> <span class='st'>"correlation"</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='fu'><a href='https://infer.tidymodels.org/reference/visualize.html'>visualise</a></span><span class='op'>(</span><span class='va'>null_dist</span><span class='op'>)</span><span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span><span class='op'>(</span>xintercept<span class='op'>=</span><span class='va'>corr1</span><span class='op'>$</span><span class='va'>stat</span>, color<span class='op'>=</span><span class='st'>"darkred"</span>, size<span class='op'>=</span><span class='fl'>1.5</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span><span class='op'>(</span>xintercept<span class='op'>=</span><span class='va'>corr1</span><span class='op'>$</span><span class='va'>stat</span>, color<span class='op'>=</span><span class='st'>"maroon1"</span>, size<span class='op'>=</span><span class='fl'>1.5</span><span class='op'>)</span><span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>plot.title<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>hjust<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-6-1.png" width="624" /></p>
@@ -1656,7 +1656,7 @@ Explanatory: habit_binary (numeric)
 <pre><code># A tibble: 1 × 1
   p_value
     &lt;dbl&gt;
-1   0.001</code></pre>
+1       0</code></pre>
 </div>
 <h4 id="interpretation-of-the-p-value-for-preemie">Interpretation of the P-Value for Preemie</h4>
 <p>The P value is 0.001. This is highly statistically significant and tells us that observing a correlation statistic of 0.1058123 or more extreme is very unlikely under the null hypothesis.Therefore, there is evidence to support the alternative hypothesis that there is positive correlation between smoking habits and the likelihood of premature birth, and we can reject the null hypothesis.</p>
@@ -1675,12 +1675,12 @@ Explanatory: habit_binary (numeric)
 <pre><code># A tibble: 1 × 2
   lower_ci upper_ci
      &lt;dbl&gt;    &lt;dbl&gt;
-1   0.0306    0.181</code></pre>
+1   0.0284    0.183</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://infer.tidymodels.org/reference/visualize.html'>visualize</a></span><span class='op'>(</span><span class='va'>bootstrap_preemie</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span><span class='fu'><a href='https://infer.tidymodels.org/reference/shade_confidence_interval.html'>shade_confidence_interval</a></span><span class='op'>(</span>endpoints <span class='op'>=</span> <span class='va'>ci_preemie</span>, color<span class='op'>=</span><span class='st'>"plum2"</span>, fill<span class='op'>=</span><span class='st'>"plum2"</span><span class='op'>)</span><span class='op'>+</span></span>
+<span><span class='fu'><a href='https://infer.tidymodels.org/reference/shade_confidence_interval.html'>shade_confidence_interval</a></span><span class='op'>(</span>endpoints <span class='op'>=</span> <span class='va'>ci_preemie</span>, color<span class='op'>=</span><span class='st'>"darkslategray3"</span>, fill<span class='op'>=</span><span class='st'>"darkslategray2"</span><span class='op'>)</span><span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>plot.title<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>hjust<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-9-1.png" width="624" /></p>
@@ -1715,7 +1715,7 @@ Coefficients:
 <span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>baby_weight<span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>weight</span><span class='op'>)</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span> <span class='va'>habit</span>,</span>
 <span>                        y<span class='op'>=</span><span class='va'>baby_weight</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
-<span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"skyblue2"</span>,<span class='st'>"red2"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
+<span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span><span class='op'>(</span>fill <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"aquamarine2"</span>,<span class='st'>"purple1"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Baby Weights (in pounds) Separated by Habits (Nonsmoker v. Smoker)"</span>,</span>
 <span> x<span class='op'>=</span> <span class='st'>"Smoker Habit"</span>, </span>
 <span>y<span class='op'>=</span> <span class='st'>"Baby Weight (in pounds)"</span><span class='op'>)</span><span class='op'>+</span></span>
@@ -1768,7 +1768,7 @@ Coefficients:
 <span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span>low_mean<span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>iflow</span><span class='op'>)</span><span class='op'>)</span><span class='op'>|&gt;</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x<span class='op'>=</span> <span class='va'>habit</span>,</span>
 <span>                        y<span class='op'>=</span><span class='va'>low_mean</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>fill<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"royalblue4"</span>, <span class='st'>"darkred"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>fill<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"aquamarine2"</span>,<span class='st'>"purple1"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title<span class='op'>=</span><span class='st'>"Average Proportion of Babies Born at a Low Birth Weight by </span></span>
 <span><span class='st'>       US Mothers' Smoking Habits (2014)"</span>,</span>
 <span>         x<span class='op'>=</span> <span class='st'>"Smoking Habits"</span>, </span>
@@ -1823,7 +1823,7 @@ Explanatory: habit_binary (numeric)
 <span>  <span class='fu'><a href='https://infer.tidymodels.org/reference/calculate.html'>calculate</a></span><span class='op'>(</span>stat<span class='op'>=</span> <span class='st'>"correlation"</span><span class='op'>)</span></span>
 <span></span>
 <span><span class='fu'><a href='https://infer.tidymodels.org/reference/visualize.html'>visualise</a></span><span class='op'>(</span><span class='va'>null_dist2</span><span class='op'>)</span><span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span><span class='op'>(</span>xintercept<span class='op'>=</span><span class='va'>corr2</span><span class='op'>$</span><span class='va'>stat</span>, color<span class='op'>=</span><span class='st'>"magenta4"</span>, size<span class='op'>=</span><span class='fl'>1.5</span><span class='op'>)</span><span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_abline.html'>geom_vline</a></span><span class='op'>(</span>xintercept<span class='op'>=</span><span class='va'>corr2</span><span class='op'>$</span><span class='va'>stat</span>, color<span class='op'>=</span><span class='st'>"maroon1"</span>, size<span class='op'>=</span><span class='fl'>1.5</span><span class='op'>)</span><span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>plot.title<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>hjust<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-16-1.png" width="624" /></p>
@@ -1858,12 +1858,12 @@ Explanatory: habit_binary (numeric)
 <pre><code># A tibble: 1 × 2
   lower_ci upper_ci
      &lt;dbl&gt;    &lt;dbl&gt;
-1   0.0870    0.264</code></pre>
+1   0.0889    0.262</code></pre>
 </div>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='fu'><a href='https://infer.tidymodels.org/reference/visualize.html'>visualize</a></span><span class='op'>(</span><span class='va'>bootstrap_lowweight</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span><span class='fu'><a href='https://infer.tidymodels.org/reference/shade_confidence_interval.html'>shade_confidence_interval</a></span><span class='op'>(</span>endpoints <span class='op'>=</span> <span class='va'>ci_lowweight</span>, fill <span class='op'>=</span><span class='st'>"cadetblue1"</span>, color <span class='op'>=</span> <span class='st'>"cadetblue1"</span><span class='op'>)</span><span class='op'>+</span></span>
+<span><span class='fu'><a href='https://infer.tidymodels.org/reference/shade_confidence_interval.html'>shade_confidence_interval</a></span><span class='op'>(</span>endpoints <span class='op'>=</span> <span class='va'>ci_lowweight</span>, color<span class='op'>=</span><span class='st'>"darkslategray3"</span>, fill<span class='op'>=</span><span class='st'>"darkslategray2"</span><span class='op'>)</span><span class='op'>+</span></span>
 <span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>plot.title<span class='op'>=</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>hjust<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-19-1.png" width="624" /></p>
