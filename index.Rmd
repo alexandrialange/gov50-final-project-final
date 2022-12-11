@@ -132,7 +132,6 @@ visualise(null_dist)+
 p_val_preemie<-null_dist|>
   get_p_value(obs_stat = corr1, direction = "greater") # ask???
 p_val_preemie
-
 ```
 
 
