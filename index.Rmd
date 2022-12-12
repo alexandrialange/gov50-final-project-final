@@ -282,7 +282,7 @@ summary_iflow_multi<-modelsummary::modelsummary(iflow_multi,
                             gof_map= c("iflow", "habit", "fage"))
 summary_iflow_multi
 ```
-####Reporting & Interpretation of P-values
+#### Reporting & Interpretation of P-values
 P value for Smoking Habits of the Mother (habitsmoker) is less than 0.001. Therefore, it is highly significant and tells us that observing a regression coefficient of 0.124 or greater is highly unlikely under the 2nd part of my 1st null hypothesis. Therefore, we would reject the 2nd part of my first my null hypothesis (that smoking does not make low birth weight more likely).
 
 P value for Mother's Age (fage) is 0.250. Since this value is greater than 0.1, it is not statistically significant. It means that a regression coefficient of 0.001 or greater would only happen in 25% of repeated samples if the null was true. Therefore, it occurs often enough that we would fail to reject the second part of my second null hypothesis (that an increase in the mother's age does make low birth weight more likely).
@@ -292,6 +292,6 @@ P value for Mother's Age (fage) is 0.250. Since this value is greater than 0.1, 
 
 ## Conclusion
 
-Overall, the null hypothesis that smoking does cause premature birth and low birth weight to be more likely was rejected every time it was evaluated; the null hypothesis that (an increase in) mother's age does cause premature birth and low birth weight to be more likely failed to be rejected both times it was evaluated. 
+Overall, the null hypothesis that smoking does make premature birth and low birth weight more likely was rejected every time it was evaluated; the null hypothesis that (an increase in) mother's age does cause premature birth and low birth weight to be more likely failed to be rejected both times it was evaluated. 
 
 Thus, if a mother smoked, it was found to increase the probability of her baby being born prematurely and/or with a low birth weight. While its effect on these probabilities remained somewhat constant with the inclusion of one possible confounding variable (mother's age/ "fage"), there are many other possible confounding factors that, if tested alongside smoking habits, may cause the effects of smoking on the two dependent variables mentioned previously to dwindle in comparison. Therefore, I am unable to confidently conclude causality between smoking habits and preterm labor and/or low birth weight. 
