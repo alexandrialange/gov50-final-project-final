@@ -27,6 +27,8 @@ After analyzing the data set and considering possible research questions, I have
  I will also run a regression to see if there is an association (what type of correlation is present) between smoking and preemies as well as smoking and being born with a low birth weight. It is important to keep in mind, however, that while my data may suggest a conclusion, I will not be able to establish causality because there are many confounding factors that could affect the chances of preterm labor and whether or not a baby is born with a low birth weight.
 
  As for comparing the effects of smoking habits and those of the mother's age, I will do so by doing multiple variable regressions. The independent variables in these regressions will be habits (`habit`) and mother's age (`fage`) and the dependent variable in the first one will be the binary variable I created for if the baby was a preemie (`ifpreemie`) and in the second will be the binary variable I created for if the baby had a low birth weight (`iflow`). The linear regression coefficient that results from each will allow me to guage differences in impact of each independent variable on the respective dependent variable. 
+ 
+ The null hypothesis for this section (my second null hypothesis) is that an increase in the mother's age does not make premature birth and/or low fetal birth weight more likely. The alternative hypothesis to this is that there is a positive correlation between an increase in mother's age and the likelihood of premature birth and/or low fetal birth weight.
 
  I also chose to include a box plot to show the distribution in baby's weights (in pounds) split up by smoking habits of the mother to show a more general visualization of the effects of smoking on a baby's weight (not just whether or not the baby had a low birth weight/ was under 5lbs 8ounces). 
 
@@ -86,7 +88,7 @@ habit_preemie
 
 In the group of babies born to mothers who had smoking habits, roughly 0.24 (24%) of them were born prematurely, while in the group of babies born to mothers who did not have smoking habits, roughly 0.11 (11%) were born prematurely. 
 
-The proportion of babies that were born prematurely more than doubled when the mother smoked, compared to when the mother didn't. This (preliminarily) supports the first part of my alternative hypothesis, which is that smoking during pregnancy makes premature birth more likely, as per the CDC.
+The proportion of babies that were born prematurely more than doubled when the mother smoked, compared to when the mother didn't. This (preliminarily) supports the first part of my first alternative hypothesis, which is that smoking during pregnancy makes premature birth more likely, as per the CDC.
 
 ## Regression of Premature Births Given Smoking Habits
 
@@ -101,62 +103,22 @@ ifpreemie_habit
 
 0.1086 = 10.86% the average change (increase) in the probability of a baby being born prematurely when the habit of smoking is present in the mother  
 
-This shows that there is an increase in the probability of babies being born prematurely with the habit of smoking being present in the mother, thus supporting the alternative hypothesis.
+This shows that there is an increase in the probability of babies being born prematurely with the habit of smoking being present in the mother, thus supporting the first alternative hypothesis.
 
-#### Null Distribution and Confidence Intervals
-
+____________
 ```{r}
-births14<-births14|>
-  mutate(habit_binary=ifelse(habit == "smoker", 1, 0))
-  
-corr1 <- births14|>
-  specify(ifpreemie~habit_binary) |>
-calculate(stat = "correlation")
-corr1
+summary_ifpreemie_habit<-modelsummary::modelsummary(ifpreemie_habit, 
+                           statistic = c("s.e.= {std.error}", 
+                                         "p={p.value}"),
+                            gof_map= c("ifpreemie", "habit"))
+summary_ifpreemie_habit
 ```
 
-```{r}
-## do i do this & if so, do i do a corr coeff?
-null_dist<- births14|>
-   specify(ifpreemie~habit_binary) |>
-  hypothesise(null="independence")|>
-  generate(reps = 1000, type = "permute")|>
-  calculate(stat= "correlation")
-
-visualise(null_dist)+
-  geom_vline(xintercept=corr1$stat, color="maroon1", size=1.5)+
-  theme(plot.title=element_text(hjust=0.5))
-```
-
-```{r}
-p_val_preemie<-null_dist|>
-  get_p_value(obs_stat = corr1, direction = "greater") # ask???
-p_val_preemie
-```
 
 
 #### Interpretation of the P-Value for Preemie
 
-The P value is 0.001. This is highly statistically significant and tells us that observing a correlation statistic of 0.1058123 or more extreme is very unlikely under the null hypothesis.Therefore, there is evidence to support the alternative hypothesis that there is positive correlation between smoking habits and the likelihood of premature birth, and we can reject the null hypothesis.
-
-```{r}
-bootstrap_preemie <- births14 |> 
-  specify(ifpreemie~habit_binary) |>
-  generate(reps=1000, type="bootstrap") |>
-  calculate(stat="correlation")
-
-
-ci_preemie <- bootstrap_preemie |>
-  get_confidence_interval(type="se", level=0.95, point_estimate=corr1)
-ci_preemie
-```
-
-```{r}
-visualize(bootstrap_preemie) +
-shade_confidence_interval(endpoints = ci_preemie, color="darkslategray3", fill="darkslategray2")+
-  theme(plot.title=element_text(hjust=0.5))
-```
-need help w/ analysis
+The P value is less than 0.001. This is highly statistically significant and tells us that observing a correlation statistic of 0.109 or more extreme is very unlikely under the first null hypothesis.Therefore, there is evidence to support the first part of the first alternative hypothesis that there is positive correlation between smoking habits and the likelihood of premature birth, and we can reject the null hypothesis.
 
 
 
@@ -169,13 +131,30 @@ preemie_multi
 
 #### Interpretation of Linear Regression
 
-0.103766= about 10.38%=the average change (increase) in the probability of a baby being born prematurely when the habit of smoking is present in the mother. This implies that the probability of a baby being born prematurely increases by about 10% when the mother has a habit it smoking. 
+0.103766= about 10.38%=the average change (increase) in the probability of a baby being born prematurely when the habit of smoking is present in the mother. This implies that the probability of a baby being born prematurely increases by about 10% when the mother has a habit it smoking (when the mothers are the same age). 
 
 0.003042= about 0.3% = the average change (increase) in the probability of a baby being born prematurely when the age of the mother is increased by one unit. This implies that the probability of a baby being born prematurely increases by about 0.3% when a mother's age increases by one year. 
 
 
 A greater average increase in the probability of a  born prematurely in this data set with the presence of smoking in the mother than with a one unit increase in the mother's age indicates that smoking has a greater effect on the odds of a baby being born prematurely than a mother's age (by one year) does.
 
+
+As for comparing the difference in habitsmoker from this multi regression where it is 0.103766 and the regression above where it is 0.1086, they are fairly similar. The average change (increase) in the probability of a baby being born prematurely is only 0.004834 (0.4%) smaller when the confounding factor of the mother's age is included. Thus, it shows that out of the two independent variables (smoking and mother's age) both increase the probability of a baby being born prematurely, but smoking habits has a much greater effect than an increase of mother's age by one year. The addition of the confounding factor of mother's age doesn't affect the regression value enough to dispute the significance of the impact of the mother's smoking habits on the likelihood of premature birth. 
+
+
+
+```{r}
+summary_ifpreemie_multi<-modelsummary::modelsummary(preemie_multi, 
+                           statistic = c("s.e.= {std.error}", 
+                                         "p={p.value}"),
+                            gof_map= c("ifpreemie", "habit", "fage"))
+summary_ifpreemie_multi
+```
+
+#### Reporting & Interpreting P-values from Multi-Regression Model Summary 
+Smoking Habits of the Mother (habitsmoker) p-value= 0.004. Since this value is less than 0.01, this value is highly significant and tells us that observing a regression coefficient of 0.104 or greater is very unlikely under the null hypothesis. Therefore, we would reject the 1st part of my 1st null hypothesis (that smoking does not make premature birth more likely). 
+
+Mother's Age (fage) p-value=0.055. Since this value is greater than 0.05 (but not by much), it is not very statistically significant (would be categorized as "statistically significant if it was less than 0.05). Therefore, it is not enough to reject the first part of my second null hypothesis (that an increase in mother's age does not make premature birth more likely) and we would fail to reject the the first part of my second null hypothesis. 
 
 
 
@@ -255,61 +234,25 @@ iflow_habit
 0.06228= the average probability of a baby being born with a classified "low birth weight" when the mother does not have a habit of smoking 
 
 
-0.14824= the average change (increase) in the average probability of a baby being born with a classified "low birth weight" when the mother has a habit of smoking 
+0.14824= the average change (increase) in the probability of a baby being born with a classified "low birth weight" when the mother has a habit of smoking 
 
-There is an increase in the average probability of a baby being born with a classified "low birth weight" when the habit of smoking was present in the mother, thus supporting the alternative hypothesis. 
+There is an increase in the average probability of a baby being born with a classified "low birth weight" when the habit of smoking was present in the mother, thus supporting the first part of the second alternative hypothesis. 
 
-```{r}
-## sample correlation coefficient
-corr2 <- births14|>
-  specify(iflow~habit_binary) |>
-calculate(stat = "correlation")
-corr2
-```
 
 ```{r}
-## generate null distribution --> do i do this & if so, do i do a corr coeff?
-null_dist2<- births14|>
-   specify(iflow~habit_binary) |>
-  hypothesise(null="independence")|>
-  generate(reps = 1000, type = "permute")|>
-  calculate(stat= "correlation")
-
-visualise(null_dist2)+
-  geom_vline(xintercept=corr2$stat, color="maroon1", size=1.5)+
-  theme(plot.title=element_text(hjust=0.5))
+summary_iflow_habit<-modelsummary::modelsummary(iflow_habit, 
+                           statistic = c("s.e.= {std.error}", 
+                                         "p={p.value}"),
+                            gof_map= c("iflow", "habit"))
+summary_iflow_habit
 ```
 
-```{r}
-##calculate p value
-p_val_lowweight<-null_dist2|>
-  get_p_value(obs_stat = corr2, direction = "greater") # ask
-p_val_lowweight
 
-```
 #### Interpretation of the P-Value for Low Birthweight
 
-The P value is 0. This is highly statistically significant and tells us that observing a correlation statistic of 0.1756078 or more extreme is unlikely under the null hypothesis.Therefore, there is evidence to support the alternative hypothesis that there is positive correlation between smoking habits and the likelihood of low birth weight, and we can reject the null hypothesis.
+The P value for smoking habits of the mother (habitsmoker) is less than 0.001. This is highly statistically significant and tells us that observing a correlation statistic of 0.148 or more extreme is unlikely under the first part of the second null hypothesis, so we would reject it.Therefore, there is evidence to support the first part of the second alternative hypothesis that there is positive correlation between smoking habits and the likelihood of low birth weight.
 
 
-```{r}
-bootstrap_lowweight <- births14 |> 
-  specify(iflow~habit_binary) |>
-  generate(reps=1000, type="bootstrap") |>
-  calculate(stat="correlation")
-
-
-
-ci_lowweight <- bootstrap_lowweight |>
-  get_confidence_interval(type="se", level=0.95, point_estimate=corr2)
-ci_lowweight
-```
-
-```{r}
-visualize(bootstrap_lowweight) +
-shade_confidence_interval(endpoints = ci_lowweight, color="darkslategray3", fill="darkslategray2")+
-  theme(plot.title=element_text(hjust=0.5))
-```
 
 ## Regression of Babies born at a Low Birth Weight Given Smoking Habits & Mother's Age 
 
@@ -320,13 +263,31 @@ iflow_multi
 
 #### Interpretation of Linear Regression:
 
- 0.124498= about 12.5%= the average change (increase) in the average probability of a baby being born with a classified "low birth weight" when the mother has a habit of smoking 
+ 0.124498= about 12.5%= the average change (increase) in the average probability of a baby being born with a classified "low birth weight" when the mother has a habit of smoking (when mothers are the same age)
  
  This implies that the average probability of a baby being born prematurely increases by about 12% with the habit of smoking being present in the mother. 
 
-0.001422= about 0.14%= the average change (increase) in the average probability of a baby being born with a classified "low birth weight" when the age of the mother is increased by one unit. This implies that the chances of a baby being born prematurely increases by about 0.1% when a mother's age increases by one year. 
+0.001422= about 0.14%= the average change (increase) in the average probability of a baby being born with a classified "low birth weight" when the age of the mother is increased by one unit and the mother does not have a habit of smoking. This implies that the chances of a baby being born prematurely increases by about 0.1% when a mother's age increases by one year. 
 
-Both the average change in the probability of a baby being born with a classified "low baby weight" when age of the mother is increased by one unit and the habit of smoking is present in the mother are positive. However, the average change in the probability is much greater when when the habit of smoking is present in the mother, signifying that smoking has a greater effect on whether or not a baby is born with a low birth weight than the age of the mother (unless the age of the mother is significantly increased- about 12 years). 
+Both the average change in the probability of a baby being born with a classified "low baby weight" when age of the mother is increased by one unit and the habit of smoking is present in the mother are positive (holding the other independent variable constant). However, the average change in the probability is much greater when when the habit of smoking is present in the mother (of mothers the same age without smoking habits) than when the age of the mother being increased by one year is the only changing variable, signifying that smoking has a greater effect on whether or not a baby is born with a low birth weight than the age of the mother. 
+
+
+compare with confounding variable !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+```{r}
+summary_iflow_multi<-modelsummary::modelsummary(iflow_multi, 
+                           statistic = c("s.e.= {std.error}", 
+                                         "p={p.value}"),
+                            gof_map= c("iflow", "habit", "fage"))
+summary_iflow_multi
+```
+####Reporting & Interpretation of P-values
+P value for Smoking Habits of the Mother (habitsmoker) is less than 0.001. Therefore, it is highly significant and tells us that observing a regression coefficient of 0.124 or greater is highly unlikely under the 2nd part of my 1st null hypothesis. Therefore, we would reject the 2nd part of my first my null hypothesis (that smoking does not make low birth weight more likely).
+
+P value for Mother's Age (fage) is 0.250. Since this value is greater than 0.1, it is not statistically significant. It means that a regression coefficient of 0.001 or greater would only happen in 25% of repeated samples if the null was true. Therefore, it occurs often enough that we would fail to reject the second part of my second null hypothesis (that an increase in the mother's age does make low birth weight more likely).
+
+
+
 
 
 ## Conclusion
