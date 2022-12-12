@@ -272,7 +272,8 @@ iflow_multi
 Both the average change in the probability of a baby being born with a classified "low baby weight" when age of the mother is increased by one unit and the habit of smoking is present in the mother are positive (holding the other independent variable constant). However, the average change in the probability is much greater when when the habit of smoking is present in the mother (of mothers the same age without smoking habits) than when the age of the mother being increased by one year is the only changing variable, signifying that smoking has a greater effect on whether or not a baby is born with a low birth weight than the age of the mother. 
 
 
-compare with confounding variable !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+When comparing the linear regression coefficient of habitsmoker in this mutli regression when is it is 0.124498 and the regression above when it is 0.14824, the average increase in probability of a baby being born at a low birth weight is only 0.023782 smaller when the confounding factor of mother's age is not taken into account. Thus, it works to emphasize how much big of an impact smoking has on the probability  of a child being born with a low birth weight even with a possible confounding factor being included. 
+
 
 ```{r}
 summary_iflow_multi<-modelsummary::modelsummary(iflow_multi, 
@@ -289,7 +290,8 @@ P value for Mother's Age (fage) is 0.250. Since this value is greater than 0.1, 
 
 
 
-
 ## Conclusion
 
+Overall, the null hypothesis that smoking does cause premature birth and low birth weight to be more likely was rejected every time it was evaluated; the null hypothesis that (an increase in) mother's age does cause premature birth and low birth weight to be more likely failed to be rejected both times it was evaluated. 
 
+Thus, if a mother smoked, it was found to increase the probability of her baby being born prematurely and/or with a low birth weight. While its effect on these probabilities remained somewhat constant with the inclusion of one possible confounding variable (mother's age/ "fage"), there are many other possible confounding factors that, if tested alongside smoking habits, may cause the effects of smoking on the two dependent variables mentioned previously to dwindle in comparison. Therefore, I am unable to confidently conclude causality between smoking habits and preterm labor and/or low birth weight. 
