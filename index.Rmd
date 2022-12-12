@@ -1,5 +1,5 @@
 ---
-title: "The Effects Of Smoking During Pregnancy"
+title: "The Effects Of Smoking & Mother's Age on Pregnancy & Newborn's Health"
 author: "Alexandria Lange"
 description: "Gov 50 Final Project"
 
@@ -34,6 +34,10 @@ After analyzing the data set and considering possible research questions, I have
 
  The research design of this project is a "cross sectional design", as I will be comparing outcomes of treated and control groups at one point in time. The treatment in this case is smoking, so the treatment group includes the mothers who have smoking habits and the control group is the group of mothers who do not have smoking habits. The outcomes are whether or not their baby was born prematurely and if they were born with a low birth weight. 
 
+**Clarification:**
+Null Hypothesis #1:smoking does not make premature birth and/or low fetal birth weight more likely
+
+Null Hypothesis #2:an increase in the mother's age does not make premature birth and/or low fetal birth weight more likely
 
 
 ## Milestone 3:Data Visualizations
@@ -90,6 +94,7 @@ In the group of babies born to mothers who had smoking habits, roughly 0.24 (24%
 
 The proportion of babies that were born prematurely more than doubled when the mother smoked, compared to when the mother didn't. This (preliminarily) supports the first part of my first alternative hypothesis, which is that smoking during pregnancy makes premature birth more likely, as per the CDC.
 
+
 ## Regression of Premature Births Given Smoking Habits
 
 ```{r}
@@ -105,7 +110,7 @@ ifpreemie_habit
 
 This shows that there is an increase in the probability of babies being born prematurely with the habit of smoking being present in the mother, thus supporting the first alternative hypothesis.
 
-____________
+
 ```{r}
 summary_ifpreemie_habit<-modelsummary::modelsummary(ifpreemie_habit, 
                            statistic = c("s.e.= {std.error}", 
@@ -158,7 +163,7 @@ Mother's Age (fage) p-value=0.055. Since this value is greater than 0.05 (but no
 
 
 
-
+***
 
 ## Effects of Habit on Baby Weight
 
@@ -186,6 +191,8 @@ This boxplot shows the distribution of baby weights by habits of the mothers (sm
 As for the outliers, the lightest baby belonged to one whose mothers had smoking habits.
 
 Overall, this graph indicates the increased likelihood of a child born to a mother who smokes having a lower birth weight than a child being born to a mother that does not smoke.
+
+***
 
 
 ## Effect of Habits on Low Birth Weight
@@ -288,10 +295,14 @@ P value for Smoking Habits of the Mother (habitsmoker) is less than 0.001. There
 P value for Mother's Age (fage) is 0.250. Since this value is greater than 0.1, it is not statistically significant. It means that a regression coefficient of 0.001 or greater would only happen in 25% of repeated samples if the null was true. Therefore, it occurs often enough that we would fail to reject the second part of my second null hypothesis (that an increase in the mother's age does make low birth weight more likely).
 
 
-
+***
 
 ## Conclusion
 
 Overall, the null hypothesis that smoking does make premature birth and low birth weight more likely was rejected every time it was evaluated; the null hypothesis that (an increase in) mother's age does cause premature birth and low birth weight to be more likely failed to be rejected both times it was evaluated. 
 
 Thus, if a mother smoked, it was found to increase the probability of her baby being born prematurely and/or with a low birth weight. While its effect on these probabilities remained somewhat constant with the inclusion of one possible confounding variable (mother's age/ "fage"), there are many other possible confounding factors that, if tested alongside smoking habits, may cause the effects of smoking on the two dependent variables mentioned previously to dwindle in comparison. Therefore, I am unable to confidently conclude causality between smoking habits and preterm labor and/or low birth weight. 
+
+
+![](https://upload.wikimedia.org/wikipedia/commons/1/11/No_smoking_symbol.svg)
+
