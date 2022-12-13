@@ -20,15 +20,15 @@ After analyzing the data set and considering possible research questions, I have
  
  Therefore, my research conjecture is that smoking makes premature birth and/or low fetal birth weight more likely, in line with the claims of the CDC. The data set I will use to perform my analysis consists of a random sample of 1000 birth cases that occurred in the US in 2014. Given that random sampling was used, my results should be generalizable to all pregnant women in the US. 
  
- The null hypothesis ($H_{0}$) is that smoking does not make premature birth and/or low fetal birth weight more likely. The alternative hypothesis ($H_{a}$) is that there is positive correlation between smoking habits and the likelihood of premature birth and/or low fetal birth weight.
+ The null hypothesis ($H_{0}$) is that smoking does not make premature birth and/or low fetal birth weight more likely. The alternative hypothesis ($H_{a}$) is that there is positive association between smoking habits and the likelihood of premature birth and/or low fetal birth weight.
  
  In order to test my hypotheses, I will first create binary variables out of the `preemie` variable (`ifpreemie`) and out of the `lowbirthweight` variable (`iflow`),  assigning "1" to if they were a preemie and if they were born with a low birth weight. From there, I will be able to calculate the average proportion of preemies among smokers and non-smokers, as well as the average proportion of babies born with a low birth weight within each group. If the average proportion of preemies and babies born with a low birth weight are each higher within the group of mothers with smoking habits than the group of mothers that did not have smoking habits (during pregnancy), then this will help support the alternative hypothesis. 
  
- I will also run a regression to see if there is an association (what type of correlation is present) between smoking and preemies as well as smoking and being born with a low birth weight. It is important to keep in mind, however, that while my data may suggest a conclusion, I will not be able to establish causality because there are many confounding factors that could affect the chances of preterm labor and whether or not a baby is born with a low birth weight.
+ I will also run a regression to see if there is an association between smoking and preemies as well as smoking and being born with a low birth weight. It is important to keep in mind, however, that while my data may suggest a conclusion, I will not be able to establish causality because there are many confounding factors that could affect the chances of preterm labor and whether or not a baby is born with a low birth weight.
 
  As for comparing the effects of smoking habits and those of the mother's age, I will do so by doing multiple variable regressions. The independent variables in these regressions will be habits (`habit`) and mother's age (`fage`) and the dependent variable in the first one will be the binary variable I created for if the baby was a preemie (`ifpreemie`) and in the second will be the binary variable I created for if the baby had a low birth weight (`iflow`). The linear regression coefficient that results from each will allow me to guage differences in impact of each independent variable on the respective dependent variable. 
  
- The null hypothesis for this section (my second null hypothesis) is that an increase in the mother's age does not make premature birth and/or low fetal birth weight more likely. The alternative hypothesis to this is that there is a positive correlation between an increase in mother's age and the likelihood of premature birth and/or low fetal birth weight.
+ The null hypothesis for this section (my second null hypothesis) is that an increase in the mother's age does not make premature birth and/or low fetal birth weight more likely. The alternative hypothesis to this is that there is a positive connection between an increase in mother's age and the likelihood of premature birth and/or low fetal birth weight.
 
  I also chose to include a box plot to show the distribution in baby's weights (in pounds) split up by smoking habits of the mother to show a more general visualization of the effects of smoking on a baby's weight (not just whether or not the baby had a low birth weight/ was under 5lbs 8ounces). 
 
@@ -123,7 +123,7 @@ summary_ifpreemie_habit
 
 #### Interpretation of the P-Value for Preemie
 
-The P value is **less than 0.001**. This is highly statistically significant and tells us that observing a correlation statistic of 0.109 or more extreme is very unlikely under the first null hypothesis.Therefore, there is evidence to support the first part of the first alternative hypothesis that there is positive correlation between smoking habits and the likelihood of premature birth, and we can reject the null hypothesis.
+The P value is **less than 0.001**. This is highly statistically significant and tells us that observing a regression coefficient of 0.109 or more extreme is very unlikely under the first null hypothesis.Therefore, there is evidence to support the first part of the first alternative hypothesis that there is positive association between smoking habits and the likelihood of premature birth, and we can reject the null hypothesis.
 
 
 
@@ -258,7 +258,7 @@ summary_iflow_habit
 
 #### Interpretation of the P-Value for Low Birthweight
 
-The P value for smoking habits of the mother (habitsmoker) is **less than 0.001**. This is highly statistically significant and tells us that observing a regression coefficient of 0.148 or more extreme is unlikely under the first part of the second null hypothesis, so we would reject it.Therefore, there is evidence to support the first part of the second alternative hypothesis that there is positive correlation between smoking habits and the likelihood of low birth weight.
+The P value for smoking habits of the mother (habitsmoker) is **less than 0.001**. This is highly statistically significant and tells us that observing a regression coefficient of 0.148 or more extreme is unlikely under the first part of the second null hypothesis, so we would reject it.Therefore, there is evidence to support the first part of the second alternative hypothesis that there is positive association between smoking habits and the likelihood of low birth weight.
 
 
 
