@@ -148,6 +148,7 @@ As for comparing the difference in habitsmoker from this multi regression where 
 
 
 
+
 ```{r}
 summary_ifpreemie_multi<-modelsummary::modelsummary(preemie_multi, 
                            statistic = c("s.e.= {std.error}", 
