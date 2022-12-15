@@ -307,3 +307,6 @@ Thus, if a mother smoked, it was found to increase the probability of her baby b
 
 ![](https://upload.wikimedia.org/wikipedia/commons/1/11/No_smoking_symbol.svg)
 
+**Data from:** [link](https://www.openintro.org/data/index.php?data=births14)
+
+**CDC claims from:** [link](https://www.cdc.gov/tobacco/campaign/tips/diseases/pregnancy.html#:~:text=Smoking%20slows%20your%20baby's%20growth,babies%20often%20have%20health%20problems.&text=Smoking%20can%20damage%20your%20baby's%20developing%20lungs%20and%20brain.)
